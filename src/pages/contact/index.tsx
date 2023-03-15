@@ -50,7 +50,7 @@ const ContactPage = () => {
         dataSource={data}
         pagination={{
           current: tableSetting.page,
-          position: ['topRight', 'bottomRight'],
+          position: ['topRight'],
           showSizeChanger: false,
           pageSize: 20,
           total: tableSetting.totalRecord,
