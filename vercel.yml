@@ -1,0 +1,8 @@
+name: my-app
+version: 2
+build:
+  env:
+    NODE_VERSION: 14
+routes:
+  - src: /(.*)$
+    dest: /index.html
