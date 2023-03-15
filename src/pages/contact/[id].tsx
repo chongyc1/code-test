@@ -57,7 +57,9 @@ const ContactDetail = () => {
           </Card>
           <br /><hr /><br />
           <h3>Episodes:</h3>
-          <small className='block'>Total In {detail?.episodes.length} Episodes</small><br />
+          <small className='block'>Total In {detail?.episodes.length}
+            &nbsp;Episode{detail?.episodes.length === 1 ? '' : 's'}
+          </small><br />
           <Table
             columns={columns}
             dataSource={detail?.episodes}
