@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getContactList } from '@/apis/contact';
 
 type HandleTableChange = (pagination: TablePaginationConfig) => void;
+type bonusPageChange = (page: number) => void;
 
 export interface ContactType {
   id: number,
@@ -14,10 +15,11 @@ export interface ContactType {
 
 type TableSetting = {
   loading: boolean,
+  page: number,
   totalRecord: number,
 }
 
-const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>, TableSetting, HandleTableChange] => {
+const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>, TableSetting, HandleTableChange, bonusPageChange] => {
   const columns: ColumnsType<ContactType> = [
     {
       title: 'Name',
@@ -48,6 +50,11 @@ const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>
   ) => {
     setPage(pagination.current || 1);
   }
+
+  const bonusPageChange = (page: number) => {
+    setPage(page);
+  }
+  
   useEffect(() => {
     const getContact = async () => {
       setLoading(true);
@@ -68,9 +75,10 @@ const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>
   const tableSetting: TableSetting = {
     loading: loading,
     totalRecord: total,
+    page: page,
   };
 
-  return [data, columns, tableSetting, handleTableChange];
+  return [data, columns, tableSetting, handleTableChange, bonusPageChange];
 
 };
 export default useContactTable;

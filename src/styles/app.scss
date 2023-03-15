@@ -17,20 +17,5 @@ body{
   padding: 20px 10vw;
 }
 
-.contact_info_row{
-  padding: 8px 0px;
-  border-bottom: 1px solid #ccc;
-  .title{
-    font-weight: 650;
-    font-size: 16px;
-  }
-  .is_alive{
-    color: green;
-  }
-  .is_not_alive{
-    color: red;
-  }
-  .value{
-    font-size: 15px;
-  }
-}
+// import go here
+@import './contact.scss';

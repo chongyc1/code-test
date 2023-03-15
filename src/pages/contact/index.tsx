@@ -2,6 +2,8 @@ import { Col, Input, Row, Table } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import useContactTable, { ContactType } from '@/hooks/useContactTable';
+import Head from 'next/head';
+import BonusPagination from '@/components/BonusPagination';
 
 const ContactPage = () => {
 
@@ -9,7 +11,7 @@ const ContactPage = () => {
 
   const [search, setSearch] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [data, columns, tableSetting, handleTableChange] = useContactTable(name);
+  const [data, columns, tableSetting, handleTableChange, bonusPageChange] = useContactTable(name);
 
   const handleOnRow = (record: ContactType) => {
     return {
@@ -30,6 +32,10 @@ const ContactPage = () => {
 
 
   return <>
+    <Head>
+      <title>Contact List - SleekFlow</title>
+      <meta name="description" content="View our list of contacts with their related information." />
+    </Head>
     <div className="content__root">
       <h1>Contacts:</h1>
       <Row>
@@ -43,6 +49,7 @@ const ContactPage = () => {
         rowKey={(data) => data.id}
         dataSource={data}
         pagination={{
+          current: tableSetting.page,
           position: ['topRight', 'bottomRight'],
           showSizeChanger: false,
           pageSize: 20,
@@ -52,6 +59,11 @@ const ContactPage = () => {
         loading={tableSetting.loading}
         onChange={handleTableChange}
         onRow={handleOnRow}
+      />
+      <BonusPagination
+        currentPage={tableSetting.page}
+        totalRecords={tableSetting.totalRecord}
+        onPageChange={(a: number) => bonusPageChange(a)}
       />
     </div>
   </>;

@@ -1,0 +1,38 @@
+.hide{
+  display: none;
+}
+
+.contact_info_row{
+  padding: 8px 0px;
+  border-bottom: 1px solid #ccc;
+  .title{
+    font-weight: 650;
+    font-size: 16px;
+  }
+  .is_alive{
+    color: green;
+  }
+  .is_not_alive{
+    color: red;
+  }
+  .value{
+    font-size: 15px;
+  }
+}
+
+.page_btn{
+  padding: 10px 20px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  &:hover{
+    background-color: #ccc;
+  }
+  &:disabled{
+    background-color: #bbb;
+    cursor: not-allowed;
+  }
+}
+
+.active-page{
+  background-color: #ccc;
+}

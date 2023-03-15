@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import useContactDetail, { EpisodeType } from '@/hooks/useContactDetail';
 import ContactInfo from '@/components/ContactInfo';
 import { ColumnsType } from 'antd/es/table';
+import Head from 'next/head';
 
 const ContactDetail = () => {
   const router = useRouter();
@@ -34,6 +35,10 @@ const ContactDetail = () => {
   }, [detail, router])
 
   return <>
+    <Head>
+      <title>{detail?.name} - SleekFlow</title>
+      <meta name="description" content={`${detail?.name} - SleekFlow`} />
+    </Head>
     <Spin spinning={loading}>
       <div className={styles.header}>
         <Row justify="space-around" align="middle" className={styles.header_content}>
