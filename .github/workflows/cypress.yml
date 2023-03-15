@@ -18,7 +18,6 @@ jobs:
         run: npm ci
       - name: Start server
         run: npm start &
-        background: true
       - name: Wait for server to start
         run: |
           timeout 10s bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/localhost/3000; do sleep 1; done'
