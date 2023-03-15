@@ -6,6 +6,7 @@ import useContactDetail, { EpisodeType } from '@/hooks/useContactDetail';
 import ContactInfo from '@/components/ContactInfo';
 import { ColumnsType } from 'antd/es/table';
 import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 const ContactDetail = () => {
   const router = useRouter();
@@ -35,10 +36,14 @@ const ContactDetail = () => {
   }, [detail, router])
 
   return <>
-    <Head>
+    <NextSeo
+      title={`${detail?.name} - SleekFlow`}
+      description={`View information about ${detail?.name}`}
+    />
+    {/* <Head>
       <title>{detail?.name} - SleekFlow</title>
       <meta name="description" content={`View information about ${detail?.name}`} />
-    </Head>
+    </Head> */}
     <Spin spinning={loading}>
       <div className={styles.header}>
         <Row justify="space-around" align="middle" className={styles.header_content}>
