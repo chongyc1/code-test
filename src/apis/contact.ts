@@ -12,7 +12,7 @@ export const getContactList = (page: number, name: string) => axios.get("https:/
 }).catch((error) => {
   return error
 });
-export const getContactDetail = (contactID: number) => axios.get(`https://rickandmortyapi.com/api/character/${contactID}`
+export const getContactDetail = (contactID: string) => axios.get(`https://rickandmortyapi.com/api/character/${contactID}`
 ).then((response) => {
   return response
 }).catch((error) => {
