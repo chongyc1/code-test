@@ -1,0 +1,19 @@
+.header {
+  height: 150px;
+  background-color: #4a4a4a;
+  color: white;
+  position: relative;
+  .header_content{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    left: 0;
+    padding: 0px 10vw;
+  }
+}
+
+.contact_name{
+  font-size: 21px;
+  font-weight: bold;
+}
