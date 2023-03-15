@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getContactList = (page, name) => axios.get("https://rickandmortyapi.com/api/character",
+export const getContactList = (page: number, name: string) => axios.get("https://rickandmortyapi.com/api/character",
   {
     params: {
       page: page,
@@ -12,7 +12,7 @@ export const getContactList = (page, name) => axios.get("https://rickandmortyapi
 }).catch((error) => {
   return error
 });
-export const getContactDetail = (contactID) => axios.get(`https://rickandmortyapi.com/api/character/${contactID}`
+export const getContactDetail = (contactID: number) => axios.get(`https://rickandmortyapi.com/api/character/${contactID}`
 ).then((response) => {
   return response
 }).catch((error) => {
