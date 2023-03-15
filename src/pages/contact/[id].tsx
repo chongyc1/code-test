@@ -37,7 +37,7 @@ const ContactDetail = () => {
   return <>
     <Head>
       <title>{detail?.name} - SleekFlow</title>
-      <meta name="description" content={`${detail?.name} - SleekFlow`} />
+      <meta name="description" content={`View information about ${detail?.name}`} />
     </Head>
     <Spin spinning={loading}>
       <div className={styles.header}>
