@@ -55,26 +55,28 @@ const BonusPagination = ({ currentPage, totalRecords, onPageChange }: Pagination
   };
 
   return <>
-    <h4>Pagination - Bonus Task</h4>
-    <h5>Total Records: {totalRecords} </h5>
-    <h5>Total Pages: {totalPages} </h5>
-    <div className={totalPages === 0 ? 'hide' : ''}>
-      <button className='page_btn' onClick={handlePrevClick} disabled={currentPage === 1}>
-        &lt;
-      </button>
-      {pageNumbers.map((pageNumber) => (
-        <button
-
-          key={pageNumber}
-          onClick={() => onPageChange(pageNumber)}
-          className={`${pageNumber === currentPage ? 'active-page' : ''} page_btn`}
-        >
-          {pageNumber}
+    <div className='bonus-pagination'>
+      <h4>Pagination - Bonus Task</h4>
+      <h5>Total Records: {totalRecords} </h5>
+      <h5>Total Pages: {totalPages} </h5>
+      <div className={totalPages === 0 ? 'hide' : ''}>
+        <button className='page_btn' onClick={handlePrevClick} disabled={currentPage === 1}>
+          &lt;
         </button>
-      ))}
-      <button className='page_btn' onClick={handleNextClick} disabled={currentPage === totalPages}>
-        &gt;
-      </button>
+        {pageNumbers.map((pageNumber) => (
+          <button
+
+            key={pageNumber}
+            onClick={() => onPageChange(pageNumber)}
+            className={`${pageNumber === currentPage ? 'active-page' : ''} page_btn`}
+          >
+            {pageNumber}
+          </button>
+        ))}
+        <button className='page_btn' onClick={handleNextClick} disabled={currentPage === totalPages}>
+          &gt;
+        </button>
+      </div>
     </div>
   </>;
 }

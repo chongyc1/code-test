@@ -28,6 +28,12 @@ const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>
     {
       title: 'Status',
       dataIndex: 'status',
+      render(val, r, i) {
+        return <span
+          className={`is_${val}`}
+          key={`status_row_${i}`}>{val}
+        </span>;
+      },
     },
     {
       title: 'Species',
@@ -54,7 +60,7 @@ const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>
   const bonusPageChange = (page: number) => {
     setPage(page);
   }
-  
+
   useEffect(() => {
     const getContact = async () => {
       setLoading(true);

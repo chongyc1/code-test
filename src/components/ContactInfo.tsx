@@ -14,7 +14,7 @@ const ContactInfo = ({ title, value, isStatus }: InfoProps) => {
         <span className='title'>{title}:</span>
       </Col>
       <Col xs={24} sm={24} md={18} lg={18} xl={18}>
-        <span className={`value ${isStatus ? value === "Alive" ? 'is_alive' : 'is_not_alive' : ''}`}>
+        <span className={`value ${isStatus ? `is_${value}` : ''}`}>
           {value === undefined ? "-" : value}
         </span>
       </Col>

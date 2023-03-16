@@ -9,15 +9,19 @@
     font-weight: 650;
     font-size: 16px;
   }
-  .is_alive{
-    color: green;
-  }
-  .is_not_alive{
-    color: red;
-  }
   .value{
     font-size: 15px;
   }
+}
+
+.is_Alive{
+  color: green;
+}
+.is_Dead{
+  color: red;
+}
+.is_unknown{
+  color: #d65500;
 }
 
 .page_btn{
@@ -35,4 +39,9 @@
 
 .active-page{
   background-color: #ccc;
+}
+
+.bonus-pagination{
+  padding-top: 15px;
+  text-align: center;
 }

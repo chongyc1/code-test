@@ -40,7 +40,7 @@ const ContactPage = () => {
       <h1>Contacts:</h1>
       <Row>
         <Col span={8}>
-          <Input placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)} />
+          <Input placeholder='Search by Name' value={search} onChange={(e) => setSearch(e.target.value)} />
         </Col>
       </Row>
       <br />
