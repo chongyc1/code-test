@@ -62,20 +62,40 @@ const useContactTable = (name: string): [ContactType[], ColumnsType<ContactType>
   }
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const getContact = async () => {
       setLoading(true);
-      const ret = await getContactList(page, name);
-      if (ret.status === 200) {
-        setData(ret.data.results);
-        setTotal(ret.data.info.count)
-      } else {
-        setData([]);
-        setTotal(0);
-        setPage(1);
+      try {
+        const ret = await getContactList(page, name, signal);
+        if (ret.status === 200) {
+          setData(ret.data.results);
+          setTotal(ret.data.info.count)
+          setLoading(false);
+        } else {
+          if (ret.code === "ERR_CANCELED") {
+            //continue loading
+            setData([]);
+            setTotal(0);
+            setPage(1);
+          } else {
+            setData([]);
+            setTotal(0);
+            setPage(1);
+            setLoading(false);
+          }
+        }
+      } catch (e) {
+        setLoading(false);
       }
-      setLoading(false);
+
     };
     getContact();
+
+    return () => {
+      controller.abort();
+    };
   }, [page, name]);
 
   const tableSetting: TableSetting = {

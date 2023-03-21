@@ -1,7 +1,8 @@
 import axios from "axios";
 
-export const getContactList = (page: number, name: string) => axios.get("https://rickandmortyapi.com/api/character",
+export const getContactList = (page: number, name: string, signal: any) => axios.get("https://rickandmortyapi.com/api/character",
   {
+    signal,
     params: {
       page: page,
       name: name,

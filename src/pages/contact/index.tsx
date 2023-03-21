@@ -1,4 +1,4 @@
-import { Col, Input, Row, Table } from 'antd';
+import { Col, Input, Row, Spin, Table } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import useContactTable, { ContactType } from '@/hooks/useContactTable';
@@ -9,6 +9,9 @@ const ContactPage = () => {
 
   const router = useRouter();
 
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingTip, setLoadingTip] = useState<string>("");
+
   const [search, setSearch] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [data, columns, tableSetting, handleTableChange, bonusPageChange] = useContactTable(name);
@@ -16,10 +19,16 @@ const ContactPage = () => {
   const handleOnRow = (record: ContactType) => {
     return {
       onClick: () => {
-        router.push(`/contact/${record.id}`);
+        setLoadingTip(record.name)
+        setLoading(true);
+        router.push(`/contact/${record.id}`, undefined, { shallow: true }).then(() => {
+          setLoading(false);
+          setLoadingTip("")
+        });
       },
     };
   };
+
 
   useEffect(() => {
     //delay after user stop typing
@@ -38,33 +47,35 @@ const ContactPage = () => {
     </Head>
     <div className="content__root">
       <h1>Contacts:</h1>
-      <Row>
-        <Col span={8}>
-          <Input placeholder='Search by Name' value={search} onChange={(e) => setSearch(e.target.value)} />
-        </Col>
-      </Row>
-      <br />
-      <Table
-        columns={columns}
-        rowKey={(data) => data.id}
-        dataSource={data}
-        pagination={{
-          current: tableSetting.page,
-          position: ['topRight'],
-          showSizeChanger: false,
-          pageSize: 20,
-          total: tableSetting.totalRecord,
-          showTotal: (total, range) => `Total ${total} records`,
-        }}
-        loading={tableSetting.loading}
-        onChange={handleTableChange}
-        onRow={handleOnRow}
-      />
-      <BonusPagination
-        currentPage={tableSetting.page}
-        totalRecords={tableSetting.totalRecord}
-        onPageChange={(a: number) => bonusPageChange(a)}
-      />
+      <Spin spinning={loading} tip={`Loading for ${loadingTip}...`}>
+        <Row>
+          <Col span={8}>
+            <Input placeholder='Search by Name' value={search} onChange={(e) => setSearch(e.target.value)} />
+          </Col>
+        </Row>
+        <br />
+        <Table
+          columns={columns}
+          rowKey={(data) => data.id}
+          dataSource={data}
+          pagination={{
+            current: tableSetting.page,
+            position: ['topRight'],
+            showSizeChanger: false,
+            pageSize: 20,
+            total: tableSetting.totalRecord,
+            showTotal: (total, range) => `Total ${total} records`,
+          }}
+          loading={tableSetting.loading}
+          onChange={handleTableChange}
+          onRow={handleOnRow}
+        />
+        <BonusPagination
+          currentPage={tableSetting.page}
+          totalRecords={tableSetting.totalRecord}
+          onPageChange={(a: number) => bonusPageChange(a)}
+        />
+      </Spin>
     </div>
   </>;
 }
