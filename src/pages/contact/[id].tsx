@@ -102,10 +102,28 @@ const ContactDetail = ({ title = '', detail, loading }: ContactDetailProps) => {
 export const getServerSideProps = async (context: any) => {
   const { id } = context.query;
 
+  type ApiReturn = {
+    status: number,
+    data: {
+      name: string,
+      image: string,
+      status: string,
+      gender: string,
+      species: string,
+      location: {
+        name: string,
+      },
+      origin: {
+        name: string,
+      },
+      episode: Array<string>,
+    }
+  }
+
   var loading = true;
   var detail: Partial<ContactDetailType> = {};
   // fetch data from an API using the ID
-  const ret = await getContactDetail(id as string);
+  const ret: ApiReturn = await getContactDetail(id as string);
   if (ret.status === 200) {
     var allEpList = Array.isArray(ret.data.episode) ? ret.data.episode : [];
     const allEps = allEpList.map((ep: string) => ep.replace('https://rickandmortyapi.com/api/episode/', '')).join(',');
