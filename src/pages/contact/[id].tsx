@@ -136,7 +136,7 @@ export const getServerSideProps = async (context: any) => {
   // pass the data to the component
   return {
     props: {
-      title: ret.data.name,
+      title: ret.data?.name === undefined ? "Invalid Contact" : ret.data.name ,
       loading: loading,
       detail: detail,
     },
